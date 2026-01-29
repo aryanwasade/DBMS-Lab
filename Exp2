@@ -251,4 +251,57 @@ error-parent key not found;because it does not exists;
 insert into course (course_id,title,dept_id,credits)values ('CS-001','Weekly Seminar',1,1); (#cs dept_id was 1);
 . Create a section of this course in Fall 2017, with sec_id of 1, and with the location of this section not yet specified.
 insert into section (section_id,course_id,sec_id,semester,year)values(8,'CS-001',1,'FALL',2017);
+.Create any table, use sequence for insertion of the rows and drop the sequence.
+to create a sequence:
+create sequence emp_seq start with 1 increment by 1;
+now create table:
+create table empl(emp_id int primary key, name varchar2(20),mobile int);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz',1234567890);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz1',1234567322);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz2',1234567891);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz3',1234567892);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz4',1234567893);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz5',1234567894);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz6',1234567895);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz7',1234567896);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz8',1234567897);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz9',1234567898);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz10',1234567899);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz11',1234567822);
+insert into empl(emp_id,name,mobile)values(emp_seq.nextval,'xyz12',1234567833);
+then to check what's the last seq;
+select max(emp_id) from emp;
+to drop seq;
+ drop sequence emp_seq;
+select max(emp_id) from empl; # table will be existing
+to create a new seq;
+create sequence emp2 start with 14 increment by 1; #14 because it was the maximum number of column
+them insert;
+insert into empl(emp_id,name ,mobile)values(emp4_seq.nextval,'xyz15',8888713800);
+.Rename the above table.
+rename empl to employee;#not for field name 
+to change the field name;
+alter table employee rename column mobile to mobilenumber;
+.Add a new column PINCODE with not null constraints to the above existing table.
+alter table employee add
+alter table employee add pincode number not null; # this will give error so delete the data or constraint
+to do this 
+truncate table employee;
+now check;
+select * from employee;
+then alter table employee add pincode number not null;
+now add the data to the table 
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz',1234567890,44001);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz2',1234567891,44002);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz3',1234567892,44003);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz4',1234567893,44004);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz5',1234567894,44005);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz6',1234567895,44006);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz7',1234567896,44007);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz8',1234567897,44008);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz9',1234567898,44009);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz10',1234567899,44000);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz11',1234567822,44012);
+insert into employee(emp_id,name,mobilenumber,pincode)values(emp4_seq.nextval,'xyz12',1234567833,44014);
+commit;
 
