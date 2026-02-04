@@ -49,4 +49,10 @@ INSERT INTO ENROLLMENT VALUES (10,106, 8, DATE '2024-07-05', 'ENROLLED');
 desc course;
 desc enrollment;
 SELECT C.course_id,C.title, COUNT(E.student_id) AS enrolled_students FROM COURSE C LEFT JOIN  SECTION S ON C.course_id=S.course_id LEFT JOIN ENROLLMENT E ON S.section_id=E.section_id GROUP BY C.course_id,C.title ORDER BY C.course_id;
+==>if i have to find any course and i did any mistake in writing the name of dept for example Computer Science to computer science i will get the error as no rows selected but if i have the huge amount of data or rows so i can find it by 
+e)select * from department where name ='Computer Science';
+select * from department where lower(name) like 'computer Science';
+select * from department where lower(name) like '%science%';
+select * from department where lower(name) like '%sci%';
+select * from department where name= 'Computer Science';
 
