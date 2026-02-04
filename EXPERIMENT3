@@ -55,4 +55,6 @@ select * from department where lower(name) like 'computer Science';
 select * from department where lower(name) like '%science%';
 select * from department where lower(name) like '%sci%';
 select * from department where name= 'Computer Science';
+g)	Display the length of the name of all the students.
+==>select length(name)from student;
 
