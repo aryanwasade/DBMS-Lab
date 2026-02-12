@@ -35,3 +35,16 @@ INSERT INTO emp6 (emp_no, birth_date, first_name, last_name, gender, hire_date, 
 INSERT INTO emp6 (emp_no, birth_date, first_name, last_name, gender, hire_date, salary, job, deptno, manager_id) VALUES (7876, date'1962-01-14', 'George', 'Black', 'M', date'1989-01-20', 1100.00, 'CLERK', 40, 7566);
 INSERT INTO emp6 (emp_no, birth_date, first_name, last_name, gender, hire_date, salary, job, deptno, manager_id) VALUES (7844, date'1965-09-28', 'Diana', 'White', 'F', date'1992-05-21', 2950.00, 'SALESMAN', 30, 7654);
 INSERT INTO emp6 (emp_no, birth_date, first_name, last_name, gender, hire_date, salary, job, deptno, manager_id) VALUES (7900, date'1972-06-19', 'Bob', 'King', 'M', date'1991-08-18', 850.00, 'CLERK', 10, 7839);
+--------------------------------------------------------------------------------------------
+1.Display all employee names that starts with "a" and are at least 3 characters in length.
+==>select first_name,last_name from emp6 where lower(first_name)like 'a%' and length(first_name)>=3;
+greater than 4
+==>select first_name,last_name from emp6 where lower(first_name)like 'a%' and length(first_name)>4;
+2.Display departments having Dollas, New York and Chicago locations.
+==>select*from departments;
+select*from departments where lower(location)='dallas' or lower(location)='new york' or lower(location)='chicago';
+3.Display the names of employees who are working as clerk, salesman or analyst and drawing a salary more than 3000.
+==>select first_name,job,salary from emp6 where lower(job) IN('clerk','salesman','analyst') and salary >= 3000;
+select first_name,job,salary from emp6; #to check
+4.Display the names of employees who are not working as managers.
+==>select first_name from emp6 where job != 'MANAGER';
