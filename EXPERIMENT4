@@ -48,3 +48,13 @@ select*from departments where lower(location)='dallas' or lower(location)='new y
 select first_name,job,salary from emp6; #to check
 4.Display the names of employees who are not working as managers.
 ==>select first_name from emp6 where job != 'MANAGER';
+5.Display the name of emp who earns highest salary.
+==>select first_name,salary from emp6 where salary=(select max(salary)from emp6);
+6.Display the employee number and name of employee working as CLERK and earning highest salary among CLERKS.
+==>select emp_no,first_name,salary from emp6 where salary=(select max(salary)from emp6 where lower(job)='clerk');
+7.Display the names of clerks who earn salary more than that of James of that of sal lesser  than that of Bob.
+==>select first_name from emp6 where job='CLERK' and salary <(select salary from emp6 where first_name='James')and salary>(select salary from emp6 where first_name='Bob'); 
+or 
+select emp_no,first_name,salary from emp6 where lower(job)='clerk' and salary>(select salary from emp6 where lower(first_name)='bob')and salary<(select salary from emp6 where lower (first_name)='james');
+8.Display the names of the employees who earn highest salary in their respective departments.
+==>select e.first_name,e.salary,e.deptno from emp6 e where e.salary=(select max(salary)from emp6 where deptno=e.deptno);
