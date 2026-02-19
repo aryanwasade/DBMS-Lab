@@ -1,0 +1,6 @@
+Create procedure Hello
+As
+Design
+DBMS_OUTPUT.PUT_line('Hello World');
+End;
+/
