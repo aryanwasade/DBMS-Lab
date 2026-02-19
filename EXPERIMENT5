@@ -1,6 +1,6 @@
-Create procedure Hello
+Create procedure Hello_world
 As
-Design
+Begin
 DBMS_OUTPUT.PUT_line('Hello World');
 End;
 /
