@@ -1,0 +1,32 @@
+EXPERIMENT13
+---------------
+triggers
+--------------
+Syntax
+create or replace trigger tri_name
+before|| after for
+insert||update||delete on table_name
+begin
+statements
+end;
+/
+------------------------------
+use st_info table
+-------------------------------
+create or replace trigger tri_upd
+after update on st_info
+begin
+DBMS_OUTPUT.PUT_LINE('This is statement level trigger fired');
+end;
+/
+#for output
+update st_info set sub1=sub1-10;
+------------------------------------------------------------------------
+create or replace trigger tri_upd
+after update on st_info for each row
+begin
+DBMS_OUTPUT.PUT_LINE('This is row level trigger fired');
+end;
+/
+#for output
+update st_info set sub1=sub1+10;
