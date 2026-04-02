@@ -51,3 +51,62 @@ BEGIN
     END IF;
 END;
 /
+------------------------------------------------------------------------------------------------------------------
+update the maximum or minimum salary to be inserted(exp 14)
+max salary = min x 10
+min=max/10
+consider the max salary is 35000 and min is 10000
+max sal= 10000*10=1000000(upper limit)
+min sal= 35000/10=3500(lower limit)
+---------------------------------------------------------------------------------------------------
+using procedures
+---------------------
+create or replace procedure max_min_salary
+as
+vmax emp2.salary%TYPE;
+vmin emp2.salary%TYPE;
+v_upper emp2.salary%TYPE;
+v_lower emp2.salary%TYPE;
+begin
+select max(salary),min(salary)
+into vmax, vmin
+from emp2;
+v_upper := vmin * 10;
+v_lower := vmax / 10;
+DBMS_OUTPUT.PUT_LINE('Maximum salary: ' || vmax);
+DBMS_OUTPUT.PUT_LINE('Minimum salary: ' || vmin);
+DBMS_OUTPUT.PUT_LINE('Upper limit (Min*10): ' || v_upper);
+DBMS_OUTPUT.PUT_LINE('Lower limit (Max/10): ' || v_lower);
+end;
+/
+output
+begin
+max_min_salary;
+end;
+/
+---------------------------------------------------------------------------------------------------------------
+using trigger
+-------------------
+create or replace trigger trg_max_min_salary1
+before insert or update on emp2
+COMPOUND TRIGGER
+declare
+vmax emp2.salary%TYPE;
+vmin emp2.salary%TYPE;
+v_upper emp2.salary%TYPE;
+v_lower emp2.salary%TYPE;
+BEFORE STATEMENT IS
+begin
+select max(salary), min(salary) into vmax, vmin from emp2;
+v_upper := vmin * 10;
+v_lower := vmax / 10;
+END BEFORE STATEMENT;
+BEFORE EACH ROW IS 
+BEGIN
+if :NEW.salary<v_lower or :NEW.salary>v_upper then
+raise_application_error(-20001,'salary should be between ' || v_lower || ' and ' || v_upper);
+end if;
+END BEFORE EACH ROW;
+end trg_max_min_salary1;
+/
+------------------------------------------------------------------------------------------------------------
